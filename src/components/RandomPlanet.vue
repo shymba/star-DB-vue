@@ -2,7 +2,7 @@
   <div class="random-planet">
     <img
         class="planet-image"
-        src="https://starwars-visualguide.com/assets/img/planets/4.jpg">
+        :src="`${img}`">
     <div class="list-description">
       <h4>{{name}}</h4>
       <ul>
@@ -28,13 +28,14 @@
 import SwapiService from "@/swapi-service";
 
 const swapi = new SwapiService();
-const id = Math.floor(Math.random()*17 + 2);
 
 export default {
   name: "RandomPlanet",
 
   data() {
     return {
+      id: null,
+      img: null,
       name: null,
       population: null,
       rotationPeriod: null,
@@ -44,7 +45,11 @@ export default {
 
   methods: {
     planetView() {
+      const _apiImg = "https://starwars-visualguide.com/assets/img/planets/";
+      const id = Math.floor(Math.random()*17 + 2);
       swapi.getPlanet(id).then((planet)=> {
+           this.id = id,
+           this.img = `${_apiImg}${this.id}.jpg`,
            this.name = planet.name,
            this.population = planet.population,
            this.rotationPeriod = planet.rotation_period,
@@ -53,7 +58,7 @@ export default {
     }
   },
   mounted() {
-    this.planetView();
+    setInterval(this.planetView, 4000)
   }
 }
 
