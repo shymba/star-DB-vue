@@ -2,21 +2,21 @@
   <div class="random-planet">
     <img
         class="planet-image"
-        src="https://starwars-visualguide.com/assets/img/planets/3.jpg">
+        src="https://starwars-visualguide.com/assets/img/planets/4.jpg">
     <div class="list-description">
-      <h4>Planet</h4>
+      <h4>{{name}}</h4>
       <ul>
         <li>
           <span>Population </span>
-          <span>100000</span>
+          <span>{{ population }}</span>
         </li>
         <li>
           <span>Rotation Period </span>
-          <span>30000</span>
+          <span>{{ rotationPeriod }}</span>
         </li>
         <li>
           <span>Diameter </span>
-          <span>3000</span>
+          <span>{{ diameter }}</span>
         </li>
       </ul>
     </div>
@@ -25,81 +25,38 @@
 
 <script>
 
-class SwapiService {
-
-  _apiBase = 'https://swapi.dev/api';
-
-  async getResource(url) {
-    const res = await fetch(`${this._apiBase}${url}`);
-    if(!res.ok) {
-      throw new Error(`Could not fetch ${url} + , received${res.status}`)
-    }
-    return await res.json()
-  }
-
-  async getAllPeople() {
-    const res = await this.getResource(`/people/`);
-    return res.results
-  }
-
-  getPerson(id) {
-    return this.getResource(`/people/${id}/`)
-  }
-
-  async getAllPlanets() {
-    const res = await this.getResource(`/planets/`);
-    return res.results
-  }
-
-  getPlanet(id) {
-    return this.getResource(`/planets/${id}/`)
-  }
-
-  async getAllStarships() {
-    const res = await this.getResource(`/starships/`);
-    return res.results
-  }
-
-  getStarship(id) {
-    return this.getResource(`/starships/${id}/`)
-  }
-}
+import SwapiService from "@/swapi-service";
 
 const swapi = new SwapiService();
-
-swapi.getPlanet(1).then((planet) => {
-  console.log(planet.name)
-})
-
-swapi.getAllPlanets().then((pl) => {
-  pl.forEach((pl) => {
-    console.log(pl.name)
-  })
-})
-
-swapi.getAllStarships().then((ships) => {
-  ships.forEach((sh) => {
-    console.log(sh.name)
-  })
-})
-
-swapi.getStarship(3).then((ship) => {
-  console.log(ship.name)
-})
-
-swapi.getAllPeople().then((people) => {
-  people.forEach((item) => {
-    console.log(item.name)
-  })
-})
-
-swapi.getPerson(3).then((person) => {
-  console.log(person.name)
-})
+const id = Math.floor(Math.random()*17 + 2);
 
 export default {
-  name: "RandomPlanet"
+  name: "RandomPlanet",
+
+  data() {
+    return {
+      name: null,
+      population: null,
+      rotationPeriod: null,
+      diameter: null,
+    }
+  },
+
+  methods: {
+    planetView() {
+      swapi.getPlanet(id).then((planet)=> {
+           this.name = planet.name,
+           this.population = planet.population,
+           this.rotationPeriod = planet.rotation_period,
+           this.diameter = planet.diameter
+      });
+    }
+  },
+  mounted() {
+    this.planetView();
+  }
 }
+
 </script>
 
 <style scoped>

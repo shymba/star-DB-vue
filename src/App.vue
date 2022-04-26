@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header/>
-    <RandomPlanet/>
+    <RandomPlanet />
   </div>
 </template>
 
