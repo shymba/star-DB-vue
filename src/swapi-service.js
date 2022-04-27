@@ -1,6 +1,7 @@
 export default class SwapiService {
 
     _apiBase = 'https://swapi.dev/api';
+    loading = true;
 
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
@@ -16,7 +17,7 @@ export default class SwapiService {
     }
 
     getPerson(id) {
-        return this.getResource(`/people/${id}/`)
+        return this.getResource(`/people/${id}/`);
     }
 
     async getAllPlanets() {
@@ -25,7 +26,7 @@ export default class SwapiService {
     }
 
     getPlanet(id) {
-        return this.getResource(`/planets/${id}/`)
+        return this.getResource(`/planets/${id}/`);
     }
 
     async getAllStarships() {
@@ -34,7 +35,7 @@ export default class SwapiService {
     }
 
     getStarship(id) {
-        return this.getResource(`/starships/${id}/`)
+        return this.getResource(`/starships/${id}/`);
     }
 }
 

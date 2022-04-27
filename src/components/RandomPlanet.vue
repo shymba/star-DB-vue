@@ -2,7 +2,12 @@
   <div class="random-planet">
     <img
         class="planet-image"
-        :src="`${img}`">
+        :src="`${img}`"
+        v-if="!isLoading"
+    >
+    <div v-else>
+      <Spinner/>
+    </div>
     <div class="list-description">
       <h4>{{name}}</h4>
       <ul>
@@ -26,12 +31,15 @@
 <script>
 
 import SwapiService from "@/swapi-service";
+import Spinner from "@/components/Spinner";
 
 const swapi = new SwapiService();
 
 export default {
   name: "RandomPlanet",
-
+  components: {
+    Spinner
+  },
   data() {
     return {
       id: null,
@@ -40,11 +48,13 @@ export default {
       population: null,
       rotationPeriod: null,
       diameter: null,
+      isLoading: false
     }
   },
 
   methods: {
     planetView() {
+      this.isLoading = true;
       const _apiImg = "https://starwars-visualguide.com/assets/img/planets/";
       const id = Math.floor(Math.random()*17 + 2);
       swapi.getPlanet(id).then((planet)=> {
@@ -53,11 +63,13 @@ export default {
            this.name = planet.name,
            this.population = planet.population,
            this.rotationPeriod = planet.rotation_period,
-           this.diameter = planet.diameter
+           this.diameter = planet.diameter,
+           this.isLoading = false;
       });
     }
   },
   mounted() {
+    // this.planetView()
     setInterval(this.planetView, 4000)
   }
 }
