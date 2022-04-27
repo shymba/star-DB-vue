@@ -1,6 +1,6 @@
 # star-db
 Vue.js project 
-[star-DB-vue](https://shymba.github.io/star-DB-vue/)
+[click](https://shymba.github.io/star-DB-vue/)
 
 ## Project setup
 ```
