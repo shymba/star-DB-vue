@@ -4,6 +4,7 @@
         class="planet-image"
         :src="`${img}`"
         v-if="!isLoading"
+        alt="planet"
     >
     <div v-else>
       <Spinner/>
@@ -63,14 +64,14 @@ export default {
            this.name = planet.name,
            this.population = planet.population,
            this.rotationPeriod = planet.rotation_period,
-           this.diameter = planet.diameter,
-           this.isLoading = false;
+           this.diameter = planet.diameter
+           this.isLoading = false
       });
     }
   },
   mounted() {
     // this.planetView()
-    setInterval(this.planetView, 4000)
+    setInterval(this.planetView, 5000)
   }
 }
 
