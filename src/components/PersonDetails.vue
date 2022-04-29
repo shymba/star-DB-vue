@@ -1,6 +1,6 @@
 <template>
   <div class="person-details">
-    <img src="https://starwars-visualguide.com/assets/img/characters/3.jpg"/>
+    <img src="https://starwars-visualguide.com/assets/img/characters/1.jpg"/>
     <div class="">
       <h4>R2-D2</h4>
       <ul>
@@ -22,8 +22,27 @@
 </template>
 
 <script>
+
+import SwapiService from "@/swapi-service";
+
+const swapi = new SwapiService();
+
 export default {
-  name: "PersonDetails"
+  name: "PersonDetails",
+  data() {
+
+  },
+
+  methods: {
+    details() {
+      swapi.getPerson(1).then((person) => {
+        console.log(person.name)
+      })
+    }
+  },
+  mounted() {
+    this.details()
+  }
 }
 </script>
 
@@ -53,6 +72,7 @@ h4 {
 
 img {
   width: 30%;
+  height: 50%;
   border-radius: 10px;
   margin-right: 1rem;
 }
