@@ -34,7 +34,6 @@
 }
 .details {
   display: flex;
-
 }
 
 </style>

@@ -69,9 +69,9 @@ export default {
       });
     }
   },
-  mounted() {
-    // this.planetView()
-    setInterval(this.planetView, 5000)
+    mounted() {
+    // this.planetView();
+    setInterval(this.planetView, 5000);
   }
 }
 

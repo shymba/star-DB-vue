@@ -2,19 +2,19 @@
   <div class="person-details">
     <img src="https://starwars-visualguide.com/assets/img/characters/1.jpg"/>
     <div class="">
-      <h4>R2-D2</h4>
+      <h4>{{ name }}</h4>
       <ul>
         <li>
-          <span>Gender</span>
-          <span>male</span>
+          <span>Gender </span>
+          <span>{{ gender }}</span>
         </li>
         <li>
-          <span>Birth Year</span>
-          <span>45</span>
+          <span>Birth Year </span>
+          <span>{{ birthYear }}</span>
         </li>
         <li>
-          <span>Eye Color</span>
-          <span>Green</span>
+          <span>Eye Color </span>
+          <span>{{ eyeColor }}</span>
         </li>
       </ul>
     </div>
@@ -30,13 +30,21 @@ const swapi = new SwapiService();
 export default {
   name: "PersonDetails",
   data() {
-
+    return {
+      name: null,
+      gender: null,
+      birthYear: null,
+      eyeColor: null
+    }
   },
 
   methods: {
     details() {
       swapi.getPerson(1).then((person) => {
-        console.log(person.name)
+        this.name = person.name,
+        this.gender = person.gender
+        this.birthYear = person.birth_year,
+        this.eyeColor = person.eye_color
       })
     }
   },
@@ -71,7 +79,6 @@ h4 {
 }
 
 img {
-  width: 30%;
   height: 50%;
   border-radius: 10px;
   margin-right: 1rem;
