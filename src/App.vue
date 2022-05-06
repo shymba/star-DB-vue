@@ -3,8 +3,14 @@
     <Header/>
     <RandomPlanet />
     <div class="details">
-      <ItemList/>
-      <PersonDetails/>
+      <ItemList
+          @select="oneItem"/>
+      <PersonDetails
+          :name="name"
+          :gender="gender"
+          :birthYear="birthYear"
+          :eyeColor="eyeColor"
+      />
     </div>
   </div>
 </template>
@@ -16,13 +22,32 @@
   import PersonDetails from "@/components/PersonDetails";
 
   export default {
+
     name: 'App',
     components: {
       PersonDetails,
       ItemList,
       Header,
       RandomPlanet,
-    }
+    },
+    data() {
+      return {
+        name: null,
+        gender: '',
+        birthYear: '',
+        eyeColor: '',
+      }
+    },
+    methods: {
+      oneItem(item, genderPerson, birthYearPerson, eyeColorPerson) {
+        this.name = item,
+        this.gender = genderPerson,
+        this.birthYear = birthYearPerson,
+        this.eyeColor = eyeColorPerson
+
+        console.log(item)
+      }
+    },
   }
 </script>
 

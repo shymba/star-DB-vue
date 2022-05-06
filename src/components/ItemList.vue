@@ -4,7 +4,10 @@
       <Spinner/>
     </div>
     <ul v-else>
-      <li v-for="item in name"
+      <li
+          :id="item"
+          @click="$emit('select', item, gender, birthYear, eyeColor)"
+          v-for="item in name"
           :key="item">
         {{ item }}
       </li>
@@ -27,8 +30,10 @@ export default {
   data() {
     return {
       name: [],
+      gender: '',
+      birthYear: '',
+      eyeColor: '',
       isLoading: false
-
     }
   },
   methods: {
@@ -39,11 +44,21 @@ export default {
           return this.name.push(item.name);
         })
       })
+    },
+    detailsPerson() {
+      swapi.getPerson(3).then((person) => {
+        console.log(person.url)
+        this.gender = person.gender,
+        this.birthYear = person.birth_year,
+        this.eyeColor = person.eye_color
+
+      })
     }
   },
-  mounted() {
-    this.peopleList()
-  }
+    mounted() {
+      this.peopleList();
+      this.detailsPerson();
+    }
 }
 </script>
 

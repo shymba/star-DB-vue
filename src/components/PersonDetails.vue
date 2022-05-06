@@ -5,15 +5,15 @@
       <h4>{{ name }}</h4>
       <ul>
         <li>
-          <span>Gender </span>
+          <span><strong>Gender </strong> </span>
           <span>{{ gender }}</span>
         </li>
         <li>
-          <span>Birth Year </span>
+          <span><strong>Birth Year </strong></span>
           <span>{{ birthYear }}</span>
         </li>
         <li>
-          <span>Eye Color </span>
+          <span><strong>Eye Color </strong></span>
           <span>{{ eyeColor }}</span>
         </li>
       </ul>
@@ -23,34 +23,27 @@
 
 <script>
 
-import SwapiService from "@/swapi-service";
-
-const swapi = new SwapiService();
-
 export default {
   name: "PersonDetails",
-  data() {
-    return {
-      name: null,
-      gender: null,
-      birthYear: null,
-      eyeColor: null
-    }
-  },
-
-  methods: {
-    details() {
-      swapi.getPerson(1).then((person) => {
-        this.name = person.name,
-        this.gender = person.gender
-        this.birthYear = person.birth_year,
-        this.eyeColor = person.eye_color
-      })
-    }
-  },
-  mounted() {
-    this.details()
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    gender: {
+      type: String,
+      required: true
+    },
+    birthYear: {
+      type: String,
+      required: true
+    },
+    eyeColor: {
+      type: String,
+      required: true
+    },
   }
+
 }
 </script>
 

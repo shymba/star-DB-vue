@@ -11,6 +11,11 @@ export default class SwapiService {
         return await res.json()
     }
 
+    _extractId(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+    }
+
     async getAllPeople() {
         const res = await this.getResource(`/people/`);
         return res.results
@@ -37,36 +42,22 @@ export default class SwapiService {
     getStarship(id) {
         return this.getResource(`/starships/${id}/`);
     }
-}
 
-// const swapi = new SwapiService();
-//
-// swapi.getPlanet(1).then((planet) => {
-//     console.log(planet.name)
-// })
-//
-// swapi.getAllPlanets().then((pl) => {
-//     pl.forEach((pl) => {
-//         console.log(pl.name)
-//     })
-// })
-//
-// swapi.getAllStarships().then((ships) => {
-//     ships.forEach((sh) => {
-//         console.log(sh.name)
-//     })
-// })
-//
-// swapi.getStarship(3).then((ship) => {
-//     console.log(ship.name)
-// })
-//
-// swapi.getAllPeople().then((people) => {
-//     people.forEach((item) => {
-//         console.log(item.name)
-//     })
-// })
-//
-// swapi.getPerson(3).then((person) => {
-//     console.log(person.name)
-// })
+}
+// _transformPerson = (person) => {
+//     return {
+//         id: this._extractId(person),
+//         name: person.name,
+//         gender: person.gender,
+//         birthYear: person.birthYear,
+//         eyeColor: person.eyeColor
+//     }
+// }
+// _extractId(item) {
+//     const idRegExp = /\/([0-9]*)\/$/;
+//     return item.url.match(idRegExp)[1];
+// }
+// async getPerson(id) {
+//     const person = await this.getResource(`/people/${id}/`);
+//     return this._transformPerson(person);
+// }
