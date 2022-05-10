@@ -39,13 +39,13 @@
       }
     },
     methods: {
-      oneItem(item, genderPerson, birthYearPerson, eyeColorPerson) {
-        this.name = item,
-        this.gender = genderPerson,
-        this.birthYear = birthYearPerson,
-        this.eyeColor = eyeColorPerson
+      oneItem(item) {
+        this.name = item.name,
+        this.gender = item.gender,
+        this.birthYear = item.birth_year,
+        this.eyeColor = item.eye_color
 
-        console.log(item)
+
       }
     },
   }

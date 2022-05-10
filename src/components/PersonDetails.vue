@@ -1,6 +1,7 @@
 <template>
   <div class="person-details">
-    <img src="https://starwars-visualguide.com/assets/img/characters/1.jpg"/>
+    <img
+        src="https://starwars-visualguide.com/assets/img/characters/1.jpg"/>
     <div class="">
       <h4>{{ name }}</h4>
       <ul>
@@ -42,7 +43,7 @@ export default {
       type: String,
       required: true
     },
-  }
+  },
 
 }
 </script>
