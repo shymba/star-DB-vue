@@ -10,6 +10,7 @@
           :gender="gender"
           :birthYear="birthYear"
           :eyeColor="eyeColor"
+          :imgUrl="img"
       />
     </div>
   </div>
@@ -20,6 +21,9 @@
   import RandomPlanet from "@/components/RandomPlanet";
   import ItemList from "@/components/ItemList";
   import PersonDetails from "@/components/PersonDetails";
+
+  import SwapiService from "@/swapi-service";
+  const swapi = new SwapiService();
 
   export default {
 
@@ -32,21 +36,24 @@
     },
     data() {
       return {
-        name: null,
+        name: '',
         gender: '',
         birthYear: '',
         eyeColor: '',
+        img: null
       }
     },
     methods: {
-      oneItem(item) {
-        this.name = item.name,
-        this.gender = item.gender,
-        this.birthYear = item.birth_year,
-        this.eyeColor = item.eye_color
+      oneItem(person) {
+        const _apiImg = "https://starwars-visualguide.com/assets/img/characters/";
 
+        this.name = person.name,
+        this.gender = person.gender,
+        this.birthYear = person.birth_year,
+        this.eyeColor = person.eye_color,
+        this.img = `${_apiImg}${swapi._extractId(person)}.jpg`
 
-      }
+      },
     },
   }
 </script>

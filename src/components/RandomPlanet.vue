@@ -70,8 +70,8 @@ export default {
     }
   },
     mounted() {
-    this.planetView();
-    // setInterval(this.planetView, 5000);
+    // this.planetView();
+    setInterval(this.planetView, 5000);
   }
 }
 

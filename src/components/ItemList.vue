@@ -5,10 +5,10 @@
     </div>
     <ul v-else>
       <li
-          @click="$emit('select', item)"
-          v-for="item in this.person"
-          :key="item">
-        {{ item.name }}
+          @click="$emit('select', person)"
+          v-for="person in this.people"
+          :key="person">
+        {{ person.name }}
       </li>
     </ul>
   </div>
@@ -26,15 +26,9 @@ export default {
   components: {
     Spinner
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
   data() {
     return {
-      person: [],
+      people: [],
       isLoading: false
     }
   },
@@ -42,8 +36,8 @@ export default {
     peopleList() {
       const namesList = swapi.getAllPeople();
       namesList.then((people) => {
-        people.forEach((item) => {
-          this.person.push(item)
+        people.forEach((person) => {
+          this.people.push(person)
         })
       })
     },
