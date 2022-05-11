@@ -1,21 +1,21 @@
 <template>
   <div class="person-details">
     <img
-        :src="`${imgUrl}`"/>
+        :src="`${detailsPerson.img}`"/>
     <div class="">
-      <h4>{{ name }}</h4>
+      <h4>{{ detailsPerson.name }}</h4>
       <ul>
         <li>
           <span><strong>Gender </strong> </span>
-          <span>{{ gender }}</span>
+          <span>{{ detailsPerson.gender }}</span>
         </li>
         <li>
           <span><strong>Birth Year </strong></span>
-          <span>{{ birthYear }}</span>
+          <span>{{ detailsPerson.birthYear }}</span>
         </li>
         <li>
           <span><strong>Eye Color </strong></span>
-          <span>{{ eyeColor }}</span>
+          <span>{{ detailsPerson.eyeColor }}</span>
         </li>
       </ul>
     </div>
@@ -27,31 +27,13 @@
 export default {
   name: "PersonDetails",
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    gender: {
-      type: String,
-      required: true
-    },
-    birthYear: {
-      type: String,
-      required: true
-    },
-    eyeColor: {
-      type: String,
-      required: true
-    },
-    imgUrl: {
-      type: String,
+    detailsPerson: {
+      type: Object,
       required: true
     }
   },
-  methods: {
-  },
-  mounted() {
-  }
+  methods: {  },
+  mounted() {  }
 
 }
 </script>

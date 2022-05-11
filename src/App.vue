@@ -5,12 +5,9 @@
     <div class="details">
       <ItemList
           @select="oneItem"/>
+
       <PersonDetails
-          :name="name"
-          :gender="gender"
-          :birthYear="birthYear"
-          :eyeColor="eyeColor"
-          :imgUrl="img"
+          :detailsPerson="personDetails"
       />
     </div>
   </div>
@@ -36,22 +33,26 @@
     },
     data() {
       return {
-        name: '',
-        gender: '',
-        birthYear: '',
-        eyeColor: '',
-        img: null
+
+        personDetails: {
+          name: '',
+          gender: '',
+          birthYear: '',
+          eyeColor: '',
+          img: ''
+        },
       }
     },
     methods: {
       oneItem(person) {
         const _apiImg = "https://starwars-visualguide.com/assets/img/characters/";
+        const _personId = swapi._extractId(person);
 
-        this.name = person.name,
-        this.gender = person.gender,
-        this.birthYear = person.birth_year,
-        this.eyeColor = person.eye_color,
-        this.img = `${_apiImg}${swapi._extractId(person)}.jpg`
+        this.personDetails.name = person.name,
+        this.personDetails.gender = person.gender,
+        this.personDetails.birthYear = person.birth_year,
+        this.personDetails.eyeColor = person.eye_color,
+        this.personDetails.img = `${_apiImg}${_personId}.jpg`
 
       },
     },
