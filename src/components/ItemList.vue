@@ -1,12 +1,9 @@
 <template>
   <div class="list">
-    <div v-if="isLoading">
-      <Spinner/>
-    </div>
-    <ul v-else>
+    <ul>
       <li
           @click="$emit('select', person)"
-          v-for="person in this.people"
+          v-for="person in this.swObjects"
           :key="person">
         {{ person.name }}
       </li>
@@ -16,35 +13,14 @@
 
 <script>
 
-import SwapiService from "@/swapi-service";
-import Spinner from "@/components/Spinner";
-
-const swapi = new SwapiService();
-
 export default {
   name: "ItemList",
-  components: {
-    Spinner
-  },
-  data() {
-    return {
-      people: [],
-      isLoading: false
-    }
-  },
-  methods: {
-    peopleList() {
-      const namesList = swapi.getAllPeople();
-      namesList.then((people) => {
-        people.forEach((person) => {
-          this.people.push(person)
-        })
-      })
+  props: {
+    swObjects: {
+      type: Array,
+      required: true
     },
-  },
-    mounted() {
-      this.peopleList();
-    }
+  }
 }
 </script>
 

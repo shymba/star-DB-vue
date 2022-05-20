@@ -1,23 +1,76 @@
 <template>
   <div class="header">
-    <h3>Star DB</h3>
+    <h3 @click="$router.push('/')">Star DB</h3>
     <ul>
-      <li><a href="#">People</a></li>
-      <li><a href="#">Planets</a></li>
-      <li><a href="#">Starships</a></li>
+<!--      <li @click="$router.push('/people')">People</li>-->
+      <li
+          @click="peopleList"
+          :people="people"
+      >
+        People
+      </li>
+      <li
+          @click="planetsList"
+          :planets="planets"
+      >
+        Planets
+      </li>
+      <li
+          @click="starshipsList"
+          :starships="starships"
+      >
+        Starships
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+
+import SwapiService from "@/swapi-service";
+
+const swapi = new SwapiService();
+
 export default {
-  name: "Header"
+  name: "Header",
+  data() {
+    return {
+      people: [],
+      planets: [],
+      starships: [],
+    }
+  },
+  methods: {
+    peopleList() {
+      const peopleNames = swapi.getAllPeople();
+      peopleNames.then((list) => {
+        this.people = list;
+        this.$emit('peopleListItems', this.people);
+      })
+    },
+    planetsList() {
+      const planetNames = swapi.getAllPlanets();
+      planetNames.then((list) => {
+        this.planets = list;
+        this.$emit('planetsListItems', this.planets);
+      })
+    },
+    starshipsList() {
+      const starshipsNames = swapi.getAllStarships();
+      starshipsNames.then((list) => {
+        this.starships = list;
+        this.$emit('starshipsListItems', this.starships);
+      })
+    },
+  }
 }
 </script>
 
 <style scoped>
   .header {
     display: flex;
+    max-width: 1140px;
+    /*margin: 0 auto;*/
     color: #fff;
   }
   h3 {
@@ -42,9 +95,10 @@ export default {
   .header ul li:hover {
     background-color: #444;
   }
-  .header ul li a {
+  .header ul li {
     text-decoration: none;
     color: #00bc8c;
+    cursor: pointer;
   }
   .header ul li:hover a {
     color: #007053;

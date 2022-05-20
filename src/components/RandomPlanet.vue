@@ -1,14 +1,14 @@
 <template>
   <div class="random-planet">
+    <div v-if="!img">
+      <Spinner/>
+    </div>
     <img
         class="planet-image"
         :src="`${img}`"
-        v-if="!isLoading"
+        v-else
         alt="planet"
     >
-    <div v-else>
-      <Spinner/>
-    </div>
     <div class="list-description">
       <h4>{{name}}</h4>
       <ul>
@@ -49,16 +49,15 @@ export default {
       population: null,
       rotationPeriod: null,
       diameter: null,
-      isLoading: false
     }
   },
 
   methods: {
     planetView() {
-      this.isLoading = true;
       const _apiImg = "https://starwars-visualguide.com/assets/img/planets/";
       const id = Math.floor(Math.random()*17 + 2);
-      swapi.getPlanet(id).then((planet)=> {
+      swapi.getPlanet(id).then((planet) => {
+        this.isLoading = true;
            this.id = id,
            this.img = `${_apiImg}${this.id}.jpg`,
            this.name = planet.name,
@@ -69,7 +68,7 @@ export default {
       });
     }
   },
-    mounted() {
+    created(){
     // this.planetView();
     setInterval(this.planetView, 5000);
   }
