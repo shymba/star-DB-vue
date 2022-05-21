@@ -6,16 +6,22 @@
       <h4>{{ detailsPerson.name }}</h4>
       <ul>
         <li>
-          <span><strong>Gender </strong> </span>
-          <span>{{ detailsPerson.gender }}</span>
+          <span v-if="detailsPerson.gender"><strong>Gender: </strong></span>
+          <span v-else-if="detailsPerson.population"><strong>Population: </strong></span>
+          <span v-else><strong>Cargo Capacity: </strong></span>
+          <span>{{ detailsPerson.gender || detailsPerson.population || detailsPerson.cargoCapacity }}</span>
         </li>
         <li>
-          <span><strong>Birth Year </strong></span>
-          <span>{{ detailsPerson.birthYear }}</span>
+          <span v-if="detailsPerson.gender"><strong>Birth Year: </strong></span>
+          <span v-else-if="detailsPerson.population"><strong>Rotation Period: </strong></span>
+          <span v-else><strong>Max Speed: </strong></span>
+          <span>{{ detailsPerson.birthYear || detailsPerson.rotationPeriod || detailsPerson.maxSpeed}}</span>
         </li>
         <li>
-          <span><strong>Eye Color </strong></span>
-          <span>{{ detailsPerson.eyeColor }}</span>
+          <span v-if="detailsPerson.gender"><strong>Eye Color: </strong></span>
+          <span v-else-if="detailsPerson.population"><strong>Diameter: </strong></span>
+          <span v-else><strong>Passengers: </strong></span>
+          <span>{{ detailsPerson.eyeColor || detailsPerson.diameter || detailsPerson.passengers }}</span>
         </li>
       </ul>
     </div>
@@ -26,6 +32,11 @@
 
 export default {
   name: "PersonDetails",
+  data() {
+    return {
+      keys: []
+    }
+  },
   props: {
     detailsPerson: {
       type: Object,
@@ -48,6 +59,7 @@ h4 {
 
 .person-details {
   display: flex;
+  flex: 50%;
   padding: 1rem;
   background-color: #303030;
   border-radius: 5px;

@@ -43,14 +43,19 @@ export default {
         gender: '',
         birthYear: '',
         eyeColor: '',
-        img: ''
+        img: '',
+        population: '',
+        rotationPeriod: '',
+        diameter: '',
+        cargoCapacity: '',
+        maxSpeed: '',
+        passengers: ''
       },
       swObjects: []
     }
   },
   methods: {
     oneItem(person) {
-      console.log(person)
       const _apiImg = "https://starwars-visualguide.com/assets/img/characters/";
       const _personId = swapi._extractId(person);
 
@@ -58,7 +63,14 @@ export default {
           this.personDetails.gender = person.gender,
           this.personDetails.birthYear = person.birth_year,
           this.personDetails.eyeColor = person.eye_color,
-          this.personDetails.img = `${_apiImg}${_personId}.jpg`
+          this.personDetails.img = `${_apiImg}${_personId}.jpg`,
+          this.personDetails.population = person.population,
+          this.personDetails.rotationPeriod = person.rotation_period,
+          this.personDetails.diameter = person.diameter
+          this.personDetails.cargoCapacity = person.cargo_capacity
+          this.personDetails.maxSpeed = person.max_atmosphering_speed
+          this.personDetails.passengers = person.passengers
+
     },
     listOfPeople(list) {
       this.swObjects = list;

@@ -70,7 +70,6 @@ export default {
   .header {
     display: flex;
     max-width: 1140px;
-    /*margin: 0 auto;*/
     color: #fff;
   }
   h3 {
