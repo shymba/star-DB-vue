@@ -38,6 +38,7 @@ export default {
       people: [],
       planets: [],
       starships: [],
+      path: ''
     }
   },
   methods: {
@@ -45,21 +46,24 @@ export default {
       const peopleNames = swapi.getAllPeople();
       peopleNames.then((list) => {
         this.people = list;
-        this.$emit('peopleListItems', this.people);
+        this.path = 'https://starwars-visualguide.com/assets/img/characters/';
+        this.$emit('peopleListItems', this.people, this.path);
       })
     },
     planetsList() {
       const planetNames = swapi.getAllPlanets();
       planetNames.then((list) => {
         this.planets = list;
-        this.$emit('planetsListItems', this.planets);
+        this.path = 'https://starwars-visualguide.com/assets/img/planets/';
+        this.$emit('planetsListItems', this.planets, this.path);
       })
     },
     starshipsList() {
       const starshipsNames = swapi.getAllStarships();
       starshipsNames.then((list) => {
         this.starships = list;
-        this.$emit('starshipsListItems', this.starships);
+        this.path = 'https://starwars-visualguide.com/assets/img/starships/';
+        this.$emit('starshipsListItems', this.starships, this.path);
       })
     },
   }

@@ -32,20 +32,12 @@
 
 export default {
   name: "PersonDetails",
-  data() {
-    return {
-      keys: []
-    }
-  },
   props: {
     detailsPerson: {
       type: Object,
       required: true
     }
   },
-  methods: {  },
-  mounted() {  }
-
 }
 </script>
 

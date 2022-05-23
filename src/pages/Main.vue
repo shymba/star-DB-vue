@@ -49,37 +49,40 @@ export default {
         diameter: '',
         cargoCapacity: '',
         maxSpeed: '',
-        passengers: ''
+        passengers: '',
+        url:''
       },
       swObjects: []
     }
   },
   methods: {
+    listOfPeople(list, path) {
+      this.swObjects = list;
+      this.url = path;
+    },
+    listOfPlanets(list, path) {
+      this.swObjects = list;
+      this.url = path;
+    },
+    listOfStarships(list, path) {
+      this.swObjects = list;
+      this.url = path;
+    },
     oneItem(person) {
-      const _apiImg = "https://starwars-visualguide.com/assets/img/characters/";
       const _personId = swapi._extractId(person);
 
-      this.personDetails.name = person.name,
+          this.personDetails.name = person.name,
           this.personDetails.gender = person.gender,
           this.personDetails.birthYear = person.birth_year,
           this.personDetails.eyeColor = person.eye_color,
-          this.personDetails.img = `${_apiImg}${_personId}.jpg`,
+          this.personDetails.img = `${this.url}${_personId}.jpg`,
           this.personDetails.population = person.population,
           this.personDetails.rotationPeriod = person.rotation_period,
-          this.personDetails.diameter = person.diameter
-          this.personDetails.cargoCapacity = person.cargo_capacity
-          this.personDetails.maxSpeed = person.max_atmosphering_speed
+          this.personDetails.diameter = person.diameter,
+          this.personDetails.cargoCapacity = person.cargo_capacity,
+          this.personDetails.maxSpeed = person.max_atmosphering_speed,
           this.personDetails.passengers = person.passengers
 
-    },
-    listOfPeople(list) {
-      this.swObjects = list;
-    },
-    listOfPlanets(list) {
-      this.swObjects = list;
-    },
-    listOfStarships(list) {
-      this.swObjects = list;
     },
   },
   computed() {
