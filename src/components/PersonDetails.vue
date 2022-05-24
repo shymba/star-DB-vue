@@ -1,7 +1,13 @@
 <template>
   <div class="person-details">
     <img
+        v-if="detailsPerson.img"
         :src="`${detailsPerson.img}`"/>
+
+    <img
+        v-else
+        :src="`${detailsPerson.banner}`">
+
     <div class="">
       <h4>{{ detailsPerson.name }}</h4>
       <ul>
@@ -35,9 +41,19 @@ export default {
   props: {
     detailsPerson: {
       type: Object,
-      required: true
+      required: false
     }
   },
+  data() {
+    return {
+      isBanner: true,
+    }
+  },
+  methods: {  },
+
+  updated() {
+
+  }
 }
 </script>
 

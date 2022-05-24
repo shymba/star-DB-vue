@@ -50,7 +50,8 @@ export default {
         cargoCapacity: '',
         maxSpeed: '',
         passengers: '',
-        url:''
+        url:'',
+        banner: 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg',
       },
       swObjects: []
     }
@@ -83,12 +84,7 @@ export default {
           this.personDetails.maxSpeed = person.max_atmosphering_speed,
           this.personDetails.passengers = person.passengers
 
-    },
-  },
-  computed() {
-    this.listOfPeople();
-    this.listOfPlanets();
-    this.listOfStarships()
+    }
   }
 }
 </script>
