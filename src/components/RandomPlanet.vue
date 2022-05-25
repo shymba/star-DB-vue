@@ -5,7 +5,7 @@
     </div>
     <img
         class="planet-image"
-        :src="`${img}`"
+        :src="img"
         v-else
         alt="planet"
     >

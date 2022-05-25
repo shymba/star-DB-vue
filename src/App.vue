@@ -19,7 +19,8 @@ export default {
   color: #fff;
 }
 body {
-  background-color: #222;
+  /*background-color: #222;*/
+  background: url(http://www.script-tutorials.com/demos/360/images/stars.png) top center #000;
 }
 .container {
   display: flex;

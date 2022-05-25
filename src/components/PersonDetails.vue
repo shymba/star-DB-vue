@@ -1,12 +1,10 @@
 <template>
   <div class="person-details">
-    <img
-        v-if="detailsPerson.img"
-        :src="`${detailsPerson.img}`"/>
+<!--    <img-->
+<!--        v-if="detailsPerson.img"-->
+<!--        :src="`${detailsPerson.img}`"/>-->
 
-    <img
-        v-else
-        :src="`${detailsPerson.banner}`">
+    <img :src="detailsPerson.img" v-img-fallback="imgFallback">
 
     <div class="">
       <h4>{{ detailsPerson.name }}</h4>
@@ -35,25 +33,31 @@
 </template>
 
 <script>
+import { ImgFallback } from 'v-img-fallback';
 
 export default {
   name: "PersonDetails",
+  directives: {
+    ImgFallback
+  },
+  data() {
+    return {
+      imgFallback: {
+        loading: this.detailsPerson.img,
+        error: this.detailsPerson.banner,
+      }
+    }
+  },
+
   props: {
     detailsPerson: {
       type: Object,
       required: false
     }
   },
-  data() {
-    return {
-      isBanner: true,
-    }
-  },
+
   methods: {  },
 
-  updated() {
-
-  }
 }
 </script>
 
