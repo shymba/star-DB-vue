@@ -51,7 +51,6 @@ export default {
         maxSpeed: '',
         passengers: '',
         url:'',
-        banner: 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg',
       },
       swObjects: []
     }

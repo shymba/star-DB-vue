@@ -1,10 +1,10 @@
 <template>
   <div class="person-details">
-<!--    <img-->
-<!--        v-if="detailsPerson.img"-->
-<!--        :src="`${detailsPerson.img}`"/>-->
-
-    <img :src="detailsPerson.img" v-img-fallback="imgFallback">
+    <img
+        :src="detailsPerson.img"
+        @error="imageLoadError"
+        class="skeleton"
+    >
 
     <div class="">
       <h4>{{ detailsPerson.name }}</h4>
@@ -33,19 +33,13 @@
 </template>
 
 <script>
-import { ImgFallback } from 'v-img-fallback';
 
 export default {
   name: "PersonDetails",
-  directives: {
-    ImgFallback
-  },
+
   data() {
     return {
-      imgFallback: {
-        loading: this.detailsPerson.img,
-        error: this.detailsPerson.banner,
-      }
+      banner: 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg'
     }
   },
 
@@ -56,7 +50,11 @@ export default {
     }
   },
 
-  methods: {  },
+  methods: {
+    imageLoadError(event) {
+      event.target.src = this.banner;
+    }
+  },
 
 }
 </script>
@@ -90,6 +88,17 @@ img {
   height: 50%;
   border-radius: 10px;
   margin-right: 1rem;
+}
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
 }
 
 </style>
