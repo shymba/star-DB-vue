@@ -2,8 +2,9 @@
   <div class="person-details">
     <img
         :src="detailsPerson.img"
-        @error="imageLoadError"
+        alt="image"
         class="skeleton"
+        @error="imageLoadError"
     >
 
     <div class="">
@@ -36,7 +37,6 @@
 
 export default {
   name: "PersonDetails",
-
   data() {
     return {
       banner: 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg'

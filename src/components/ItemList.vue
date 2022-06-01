@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <ul>
+    <ul v-if="swObjects[0]">
       <li
           @click="$emit('select', person)"
           v-for="person in this.swObjects"
@@ -8,18 +8,31 @@
         {{ person.name }}
       </li>
     </ul>
+    <div class="spinner-list"
+        v-else
+    >
+      <Spinner />
+    </div>
   </div>
 </template>
 
 <script>
+import Spinner from "@/components/Spinner";
 
 export default {
   name: "ItemList",
+  components: {
+    Spinner
+  },
   props: {
     swObjects: {
       type: Array,
       required: true
     },
+  },
+  methods: {
+  },
+  mounted() {
   }
 }
 </script>
@@ -32,6 +45,10 @@ export default {
   border: 1px solid #444;
   border-bottom: none;
   border-radius: 5px;
+}
+
+.spinner-list {
+  padding-top: 5rem;
 }
 
 .list ul {

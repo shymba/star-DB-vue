@@ -21,6 +21,9 @@
       >
         Starships
       </li>
+      <li>
+        Add Items
+      </li>
     </ul>
   </div>
 </template>

@@ -49,27 +49,31 @@ export default {
       population: null,
       rotationPeriod: null,
       diameter: null,
+      isLoading: false
     }
   },
 
   methods: {
     planetView() {
-      const _apiImg = "https://starwars-visualguide.com/assets/img/planets/";
-      const id = Math.floor(Math.random()*17 + 2);
-      swapi.getPlanet(id).then((planet) => {
-        this.isLoading = true;
-           this.id = id,
-           this.img = `${_apiImg}${this.id}.jpg`,
-           this.name = planet.name,
-           this.population = planet.population,
-           this.rotationPeriod = planet.rotation_period,
-           this.diameter = planet.diameter
-           this.isLoading = false
-      });
+      try {
+        const _apiImg = "https://starwars-visualguide.com/assets/img/planets/";
+        const id = Math.floor(Math.random()*17 + 2);
+        swapi.getPlanet(id).then((planet) => {
+          this.id = id,
+              this.img = `${_apiImg}${this.id}.jpg`,
+              this.name = planet.name,
+              this.population = planet.population,
+              this.rotationPeriod = planet.rotation_period,
+              this.diameter = planet.diameter
+        });
+      } catch (e) {
+        console.log('Error')
+      } finally {
+        this.img = null;
+      }
     }
   },
-    created(){
-    // this.planetView();
+    mounted(){
     setInterval(this.planetView, 5000);
   }
 }
