@@ -1,12 +1,10 @@
 import Main from "@/pages/Main";
 import {createRouter, createWebHistory} from 'vue-router';
-import RandomPlanet from "@/pages/RandomPlanet";
-import ItemList from "@/components/ItemList";
+import ItemForms from "@/components/ItemForms";
 
 const routes = [
     { path: '/', component: Main },
-    { path: '/random', component: RandomPlanet },
-    { path: '/people', component: ItemList },
+    { path: '/addItems', component: ItemForms },
 ]
 
 const router = createRouter({
