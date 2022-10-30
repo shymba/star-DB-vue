@@ -9,7 +9,9 @@
     <div class="details">
       <ItemList
           :swObjects="swObjects"
-          @select="oneItem"/>
+          @select="oneItem"
+          class="item-list"
+      />
 
       <PersonDetails
           :detailsPerson="personDetails"
@@ -92,5 +94,27 @@ export default {
 .details {
   display: flex;
 }
+
+.item-list {
+  max-height: 430px;
+  overflow: scroll;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #757575;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #303030;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
 
 </style>

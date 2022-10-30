@@ -17,15 +17,18 @@
         {{name.name}}
       </li>
     </ul>
-    <div class="page-wrapper">
-      <div
-          @click="changePage(pageNumber)"
-          class="pages"
-          v-for="pageNumber in totalPages"
-          :key="pageNumber">
-        {{ pageNumber }}
-      </div>
-    </div>
+
+    <div ref="observer" class="observer"></div>
+
+<!--    <div class="page-wrapper">-->
+<!--      <div-->
+<!--          @click="changePage(pageNumber)"-->
+<!--          class="pages"-->
+<!--          v-for="pageNumber in totalPages"-->
+<!--          :key="pageNumber">-->
+<!--        {{ pageNumber }}-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -70,9 +73,36 @@ export default {
       this.people = response.data.results;
       this.loading = true
     },
+    async getMorePeople(page) {
+      // this.loading = false;
+      const response = await axios.get('https://swapi.dev/api/people/', {
+        params: {
+          page: page
+        }
+      });
+      this.totalPages = Math.ceil(response.data.count / this.limit);
+      this.people = [...this.people, ...response.data.results];
+      console.log(this.people)
+      // this.loading = true
+    },
   },
   mounted() {
-    this.getPeople();
+    this.getPeople().then(() => {
+      const options = {
+        rootMargin: '0px',
+        threshold: 1.0
+      }
+      const callback = (entries) => {
+        if(entries[0].isIntersecting) {
+          let num = this.page +=1;
+          this.getMorePeople(num);
+          console.log(entries);
+        }
+      }
+      const observer = new IntersectionObserver(callback, options);
+      observer.observe(this.$refs.observer)
+      console.log(this.$refs.observer);
+    });
   }
 }
 </script>
@@ -128,8 +158,12 @@ export default {
   font-size: 14px;
   padding: 6px;
   border-radius: 5px;
-  border: 2px solid black;
+  border: 2px solid #494242;
   margin: 2px;
+}
+
+.pages:hover {
+  background-color: #444;
 }
 
 </style>

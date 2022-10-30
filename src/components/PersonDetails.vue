@@ -69,6 +69,7 @@ h4 {
 
 .person-details {
   display: flex;
+  width: 50%;
   flex: 50%;
   padding: 1rem;
   background-color: #303030;
